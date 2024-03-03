@@ -5,7 +5,7 @@
 git clone https://github.com/CodeWithHBKY/Vue-Social-App-Frontend-laravel-apis.git
 ```
 
-## After installation
+## After Cloning
 
 ### Step 1
 ```
