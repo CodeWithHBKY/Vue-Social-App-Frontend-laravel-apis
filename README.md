@@ -1,29 +1,27 @@
-# social-frontend
+# Laravel Social App APIs
 
-This template should help get you started developing with Vue 3 in Vite.
+## Clone the repo
+```
+git clone https://github.com/CodeWithHBKY/Vue-Social-App-Frontend-laravel-apis.git
+```
 
-## Recommended IDE Setup
+## After installation
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Step 1
+```
+cd Vue-Social-App-Frontend-laravel-apis.git/
+```
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
+### Step 2
+```
+npm install
+```
+if gitting any error during npm install then delete package-lock.json file and re run
+```
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+#### Step 3 
 ```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
+npm run dev
 ```
