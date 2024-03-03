@@ -16,7 +16,7 @@ cd Vue-Social-App-Frontend-laravel-apis.git/
 ```
 npm install
 ```
-if gitting any error during npm install then delete package-lock.json file and re run
+if getting any error during npm install then delete package-lock.json file and re run
 ```
 npm install
 ```
