@@ -4,7 +4,7 @@ import { ThumbsUp, MessageSquareDot, Share2 } from "lucide-vue-next";
 const { post } = defineProps(["post"]);
 import { useAuthStore } from "@/stores/authStore";
 
-const emits = defineEmits(["likeUnlikePost"]);
+const emits = defineEmits(["likeUnlikePost", "openCommentModal"]);
 
 const authStore = useAuthStore();
 
@@ -27,7 +27,7 @@ const isLikedByUs = computed(() => {
 			<ThumbsUp />
 			Like ({{ post.likes_count }})
 		</button>
-		<button class="flex gap-2 font-semibold">
+		<button class="flex gap-2 font-semibold" @click="$emit('openCommentModal')">
 			<MessageSquareDot />
 			Comment({{ post.comments_count }})
 		</button>
