@@ -1,4 +1,4 @@
-import { http } from './http_service';
+import { http, httpFile } from './http_service';
 
 export function getPosts(){
     return http().get('user/posts-public')
@@ -10,4 +10,8 @@ export function likeUnlikePost(id){
 
 export function postComment(data){
     return http().post(`user/comments`, data)
+}
+
+export function createPost(data){
+    return httpFile().post(`user/posts`, data)
 }

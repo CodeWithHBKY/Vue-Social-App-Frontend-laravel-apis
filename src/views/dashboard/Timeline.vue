@@ -2,7 +2,7 @@
 import Card from "@/components/Card.vue";
 import { usePostStore } from "@/stores/postStore";
 import CommentModal from "@/components/CommentModal.vue";
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import PostModal from "@/components/Post/PostModal.vue";
 
 const postStore = usePostStore();
@@ -34,6 +34,21 @@ const postModalIsOpen = ref(false);
 const _openPostModal = () => {
 	postModalIsOpen.value = true;
 };
+
+const errors = ref({});
+const handleCreatePost = async (data) => {
+	try {
+		const formData = new FormData();
+		if (data.image) {
+			formData.append("image", data.image);
+		}
+		formData.append("text", data.text);
+		await postStore.createPost(formData);
+		postModalIsOpen.value = false;
+	} catch (error) {
+		errors.value = error.response.data.errors;
+	}
+};
 </script>
 
 <template>
@@ -58,6 +73,6 @@ const _openPostModal = () => {
 			@close="() => (commentModalIsOpen = false)"
 		/>
 
-		<PostModal :isOpen="postModalIsOpen" :close="() => (postModalIsOpen = false)" />
+		<PostModal @createPost="handleCreatePost" :isOpen="postModalIsOpen" :close="() => (postModalIsOpen = false)" />
 	</div>
 </template>

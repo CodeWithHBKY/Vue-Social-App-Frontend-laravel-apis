@@ -1,8 +1,9 @@
 <script setup>
 import { X, Image } from "lucide-vue-next";
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 const { isOpen, close } = defineProps(["isOpen", "close"]);
+const emits = defineEmits(["createPost"]);
 
 const selectedImage = ref(null);
 const selectImage = (event) => {
@@ -11,6 +12,13 @@ const selectImage = (event) => {
 
 const previewImage = (img) => {
 	return URL.createObjectURL(img);
+};
+
+const postData = reactive({});
+
+const createPost = () => {
+	postData.image = selectedImage.value;
+	emits("createPost", postData);
 };
 </script>
 
@@ -27,6 +35,7 @@ const previewImage = (img) => {
 			</div>
 			<div class="p-4 h-full">
 				<textarea
+					v-model="postData.text"
 					:class="selectedImage ? 'min-h-12' : ' min-h-36 h-full'"
 					class="w-full p-2 resize-none bg-transparent text-xl outline-none"
 					placeholder="Write something..."
@@ -45,7 +54,7 @@ const previewImage = (img) => {
 						<input @change="selectImage" id="image" type="file" accept="image/png,jpeg,jpg" hidden />
 					</div>
 				</div>
-				<button class="bg-blue-500 text-white p-2 rounded-lg w-full my-2">Post</button>
+				<button @click="createPost" class="bg-blue-500 text-white p-2 rounded-lg w-full my-2">Post</button>
 			</div>
 		</div>
 	</div>

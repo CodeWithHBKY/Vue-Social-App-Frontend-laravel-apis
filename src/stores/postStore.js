@@ -49,5 +49,18 @@ export const usePostStore = defineStore('postStore', {
                 throw error;
             }
         },
+        async createPost(data) {
+            console.log(data);
+            const { createPost }  = await import('@/services/post_service');
+            try {
+                const response = await createPost(data);
+                if (response.data) {
+                    this.posts.unshift(response.data.data);
+                }
+                
+            } catch (error) {
+                throw error;
+            }
+        },
     }
 });
