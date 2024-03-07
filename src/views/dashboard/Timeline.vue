@@ -3,6 +3,7 @@ import Card from "@/components/Card.vue";
 import { usePostStore } from "@/stores/postStore";
 import CommentModal from "@/components/CommentModal.vue";
 import { ref } from "vue";
+import PostModal from "@/components/Post/PostModal.vue";
 
 const postStore = usePostStore();
 
@@ -28,10 +29,21 @@ const handlePostComment = async (data) => {
 		console.log(error);
 	}
 };
+
+const postModalIsOpen = ref(false);
+const _openPostModal = () => {
+	postModalIsOpen.value = true;
+};
 </script>
 
 <template>
-	<div class="flex items-center flex-col gap-4">
+	<div class="flex items-center flex-col gap-4 relative">
+		<button
+			@click="_openPostModal"
+			class="sticky top-20 bg-white shadow-md px-2 py-4 rounded-full text-center font-semibold w-[90%] cursor-pointer"
+		>
+			What's in your mind
+		</button>
 		<Card
 			v-for="post in postStore.posts"
 			:key="post.id"
@@ -45,5 +57,7 @@ const handlePostComment = async (data) => {
 			v-if="commentModalIsOpen"
 			@close="() => (commentModalIsOpen = false)"
 		/>
+
+		<PostModal :isOpen="postModalIsOpen" :close="() => (postModalIsOpen = false)" />
 	</div>
 </template>
