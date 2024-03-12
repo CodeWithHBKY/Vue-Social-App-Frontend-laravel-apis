@@ -18,3 +18,11 @@ export function changePassword(data) {
 export function logOut() {
 	return http().get("auth/logout");
 }
+
+export function forgotPasswordRequest (data) {
+	return http().post('auth/forget-password-request', data);
+}
+
+export function forgotPassword (data) {
+	return http().post('auth/forget-password', data);
+}

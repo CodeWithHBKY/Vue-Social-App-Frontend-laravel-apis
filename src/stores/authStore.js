@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { updateProfile, changePassword, logOut } from '../services/auth_service';
+import { updateProfile, changePassword, logOut, forgotPasswordRequest, forgotPassword } from '../services/auth_service';
 
 export const useAuthStore = defineStore('authStore', {
     state: () => {
@@ -44,6 +44,20 @@ export const useAuthStore = defineStore('authStore', {
                 this.user = {};
                 this.isLoggedIn = false;
                 localStorage.setItem('access_token', '');
+            } catch (error) {
+                throw error;
+            }
+        },
+        async handleForgotPasswordRequest (data) {
+            try {
+                await forgotPasswordRequest(data)
+            } catch (error) {
+                throw error;
+            }
+        },
+        async handleForgotPassword (data) {
+            try {
+                await forgotPassword(data)
             } catch (error) {
                 throw error;
             }
