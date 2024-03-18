@@ -2,12 +2,18 @@
 import Card from "@/components/Card.vue";
 import { usePostStore } from "@/stores/postStore";
 import CommentModal from "@/components/CommentModal.vue";
-import { ref, reactive } from "vue";
+import { ref, onMounted } from "vue";
 import PostModal from "@/components/Post/PostModal.vue";
 
 const postStore = usePostStore();
 
 postStore.getPosts();
+
+onMounted(() => {
+	Echo.private("post").listen("PostEvent", (e) => {
+		postStore.addToPostArray(e.data);
+	});
+});
 
 const handleLikeUnlikePost = async (id) => {
 	try {

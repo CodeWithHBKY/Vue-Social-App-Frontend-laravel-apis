@@ -53,14 +53,13 @@ export const usePostStore = defineStore('postStore', {
             console.log(data);
             const { createPost }  = await import('@/services/post_service');
             try {
-                const response = await createPost(data);
-                if (response.data) {
-                    this.posts.unshift(response.data.data);
-                }
-                
+                await createPost(data);
             } catch (error) {
                 throw error;
             }
+        },
+        addToPostArray(data){
+            this.posts.unshift(data);
         },
     }
 });

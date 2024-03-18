@@ -9,6 +9,6 @@ const commonStore = useCommonStore();
 		<p class="text-sm">
 			{{ post.text }}
 		</p>
-		<img class="rounded-lg" :src="commonStore.mediaUrl + post.image" alt="" />
+		<img v-if="post.image" class="rounded-lg" :src="commonStore.mediaUrl + post.image" alt="" />
 	</div>
 </template>
