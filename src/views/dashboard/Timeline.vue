@@ -13,6 +13,10 @@ onMounted(() => {
 	Echo.private("post").listen("PostEvent", (e) => {
 		postStore.addToPostArray(e.data);
 	});
+	Echo.private("comment").listen("CommentEvent", (e) => {
+		console.log(e);
+		postStore.addToCommentArray(e.data);
+	});
 });
 
 const handleLikeUnlikePost = async (id) => {

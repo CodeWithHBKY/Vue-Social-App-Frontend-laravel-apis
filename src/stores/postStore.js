@@ -38,13 +38,7 @@ export const usePostStore = defineStore('postStore', {
         async postComment(data) {
             const { postComment }  = await import('@/services/post_service');
             try {
-                const response = await postComment(data);
-                if (response.data) {
-                    const index = this.posts.findIndex(p => p.id === response.data.post_id);
-                    this.posts[index].comments.push(response.data)
-                    this.posts[index].comments_count += 1;
-                }
-                
+                await postComment(data);
             } catch (error) {
                 throw error;
             }
@@ -60,6 +54,13 @@ export const usePostStore = defineStore('postStore', {
         },
         addToPostArray(data){
             this.posts.unshift(data);
+        },
+        addToCommentArray(data){
+            if (data) {
+                const index = this.posts.findIndex(p => p.id === data.post_id);
+                this.posts[index].comments.push(data)
+                this.posts[index].comments_count += 1;
+            }
         },
     }
 });
