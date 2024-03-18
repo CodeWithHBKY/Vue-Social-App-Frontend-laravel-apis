@@ -14,8 +14,11 @@ onMounted(() => {
 		postStore.addToPostArray(e.data);
 	});
 	Echo.private("comment").listen("CommentEvent", (e) => {
-		console.log(e);
 		postStore.addToCommentArray(e.data);
+	});
+	Echo.private("like").listen("LikeEvent", (e) => {
+		console.log(e);
+		postStore.addToLikeArray(e.data);
 	});
 });
 
