@@ -19,6 +19,11 @@ const routes = [
 				component: () => import('./views/dashboard/Timeline.vue')
 			},
 			{
+				path: '/notifications',
+				name: 'dashboard.notifications',
+				component: () => import('./views/dashboard/Notifications.vue')
+			},
+			{
 				path: '/settings',
 				name: 'dashboard.settings',
 				component: () => import('./views/dashboard/Settings.vue')

@@ -26,3 +26,11 @@ export function forgotPasswordRequest (data) {
 export function forgotPassword (data) {
 	return http().post('auth/forget-password', data);
 }
+
+export function markNotificationComplete (id) {
+	return http().get(`user/notifications/${id}`);
+}
+
+export function markAllNotificationComplete () {
+	return http().get(`user/notifications`);
+}

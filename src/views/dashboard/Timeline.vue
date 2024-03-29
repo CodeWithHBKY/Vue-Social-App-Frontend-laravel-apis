@@ -2,10 +2,14 @@
 import Card from "@/components/Card.vue";
 import { usePostStore } from "@/stores/postStore";
 import CommentModal from "@/components/CommentModal.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import PostModal from "@/components/Post/PostModal.vue";
+import { useRoute } from "vue-router";
+import { useAuthStore } from "@/stores/authStore";
 
 const postStore = usePostStore();
+const auth = useAuthStore();
+const route = useRoute();
 
 postStore.getPosts();
 
@@ -19,6 +23,10 @@ onMounted(() => {
 	Echo.private("like").listen("LikeEvent", (e) => {
 		console.log(e);
 		postStore.addToLikeArray(e.data);
+	});
+	Echo.private(`notifications.${auth.user.id}`).notification((e) => {
+		console.log("noti", e);
+		auth.user.notifications.push(e);
 	});
 });
 
@@ -34,6 +42,14 @@ const openCommentModal = (post) => {
 	selectedPost.value = post;
 	commentModalIsOpen.value = true;
 };
+
+watch(() => {
+	const postId = route.query.post;
+	const post = postStore.posts.find((p) => p.id == postId);
+	if (post) {
+		openCommentModal(post);
+	}
+});
 
 const handlePostComment = async (data) => {
 	try {
