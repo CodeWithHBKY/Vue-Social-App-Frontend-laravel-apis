@@ -5,7 +5,7 @@ import { X } from "lucide-vue-next";
 import CardBody from "./Card/CardBody.vue";
 import CardHeader from "./Card/CardHeader.vue";
 
-const emits = defineEmits(["postComment", "commentPosted"]);
+const emits = defineEmits(["postComment", "commentPosted", "close"]);
 
 const { post } = defineProps(["post"]);
 
